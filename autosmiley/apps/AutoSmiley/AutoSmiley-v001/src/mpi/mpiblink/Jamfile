@@ -1,0 +1,18 @@
+project libmpblinkdetector
+  : usage-requirements <include>.
+  ;
+
+#lib libmpblinkdetector : blink.cc blink_wts.cc 
+#		  /libmpisearch//libmpisearch
+#			/libmpeyefinder//libmpeyefinder
+#			/libmputil//libmputil
+#		: <optimization>speed
+#		: <link>shared
+
+lib libmpblinkdetector : blink.cc blink_wts.cc
+		: <cflags>"-Wno-reorder -Wno-deprecated" 
+                  <library>/libmpisearch//libmpisearch
+		  <library>/libmpeyefinder//libmpeyefinder
+		  <library>/libmputil//libmputil
+		: <optimization>speed <link>shared
+		;

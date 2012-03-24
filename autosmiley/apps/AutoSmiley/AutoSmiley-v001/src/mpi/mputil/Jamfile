@@ -1,0 +1,12 @@
+project libmputil
+  : usage-requirements <include>.
+  ;
+
+
+ lib libmputil : Averaging/exponentialaverager.cpp Images/color.cpp Images/ffimage.cpp  
+                          # Communications/socketio.cpp # Do we need this??
+                          # Configuration/configuration.cpp # Do we need this??
+		: <library>/libmpisearch//libmpisearch 
+		  <cflags>-Wno-deprecated
+		: <optimization>speed <link>shared
+		;

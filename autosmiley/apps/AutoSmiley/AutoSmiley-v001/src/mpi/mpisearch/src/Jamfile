@@ -1,0 +1,14 @@
+project libmpisearch
+  : usage-requirements <include>.
+  ;
+
+
+lib libmpisearch : mpisearchFaceDetector.cc ci.cc gentleFace1.cc faceboxlist.cc roi.cc square.cc 
+    : <cflags>"-Wno-unused -Wno-deprecated"
+    #  <toolset>darwin:<library>System
+    : <optimization>speed <link>shared 
+    #: <toolset>darwin:<library>System  # this is needed for gcc 4.0 on Mac OS X
+    ;
+
+
+#lib System : : <toolset>darwin:<name>System <link>shared ;  # this is needed for Mac OS X

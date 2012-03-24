@@ -1,0 +1,20 @@
+project libmpsmiledetector
+  : usage-requirements <include>. <define>MPTX 
+                       <library>/libmpisearch//libmpisearch
+                       <library>/libmpeyefinder//libmpeyefinder
+  ;
+
+lib libmpsmiledetector : smile.cc smile_wts.cc
+        : 
+         <cflags>"-Wno-reorder -Wno-deprecated" 
+
+         <variant>debug:<cflags>"`Magick++-config --cppflags`"
+         <variant>debug:<linkflags>"`Magick++-config --ldflags` `Magick++-config --libs`" 
+         <variant>debug:<define>II_USE_IMAGEMAGICK
+         <variant>debug:<define>SMD_USE_IMAGEMAGICK
+
+         <library>/libmpisearch//libmpisearch
+	       <library>/libmpeyefinder//libmpeyefinder
+#	       <library>/libmputil//libmputil
+        : <optimization>speed <link>shared
+        ;

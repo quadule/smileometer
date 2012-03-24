@@ -1,0 +1,30 @@
+project libmpeyefinder
+  : usage-requirements <include>. 
+                       <library>/libmpisearch//libmpisearch
+  ;
+
+EF = EyeWeightsFiles ;
+
+lib libmpeyefinder : eyefinder.cc eyefinderBinary.cc visualobject.cpp 
+		   faceobject.cpp eyeobject.cpp beyesobject.cpp 
+          $(EF)/lefteye_eye_dist_eye_centered.cc $(EF)/righteye_eye_dist_eye_centered.cc
+# additional, experimental eyefinder weights files are currently unused
+#         $(EF)/lefteye_largest_2_eye_centered.cc   $(EF)/righteye_largest_2_eye_centered.cc 
+#		  $(EF)/lefteye_eye_dist_face_centered.cc   $(EF)/lefteye_largest_eye_centered.cc  
+#		  $(EF)/righteye_eye_dist_face_centered.cc  $(EF)/righteye_largest_eye_centered.cc 
+#		  $(EF)/lefteye_eye_only_eye_centered.cc    $(EF)/lefteye_largest_face_centered.cc  
+#		  $(EF)/righteye_eye_only_eye_centered.cc   $(EF)/righteye_largest_face_centered.cc 
+#		  $(EF)/lefteye_half_dist_eye_centered.cc   $(EF)/lefteye_smallest_eye_centered.cc 
+#		  $(EF)/righteye_half_dist_eye_centered.cc  $(EF)/righteye_smallest_eye_centered.cc 
+		: <cflags>"-Wno-unused -Wno-deprecated"
+		  <library>/libmpisearch//libmpisearch
+		: <optimization>speed <link>shared
+		;
+
+# recall that main targets rules in Boost.Build use following syntax:
+#    function-name main-target-name 
+#        : sources 
+#        : requirements 
+#        : default-build 
+#        : usage-requirements 
+#        ;
