@@ -2,11 +2,20 @@ class Smiles < Array
   MINUTES = 60
   HOURS = 60*MINUTES
   RECENT = 10*MINUTES
+  LOG_FILE = File.expand_path('~/Documents/smileometer.csv')
   attr_accessor :start
   
   def initialize(*args)
     super
     @start = now
+  end
+  
+  def dump
+    log_exists = File.exists?(LOG_FILE)
+    File.open(LOG_FILE, 'a') do |f|
+      f << "time,smiles_per_hour\n" unless log_exists
+      f << [Time.at(last), per_hour.round(2)].join(',') << "\n"
+    end
   end
   
   def now
@@ -19,6 +28,7 @@ class Smiles < Array
   
   def log
     push now
+    dump
   end
   
   def in_last(seconds)
@@ -45,7 +55,11 @@ class Smiles < Array
   end
   
   def per_hour_total
-    count * (HOURS / elapsed)
+    if elapsed == 0
+      0.0
+    else
+      count * (HOURS / elapsed)
+    end
   end
 end
 
