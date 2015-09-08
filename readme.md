@@ -2,7 +2,7 @@
 
 Smileometer uses your Mac's webcam to measure how much you smile:
 
-![smileometer](http://github.com/quadule/smileometer/raw/master/smileometer.jpg)
+![smileometer](https://raw.githubusercontent.com/quadule/smileometer/master/smileometer.jpg)
 
 Download: https://github.com/downloads/quadule/smileometer/Smileometer-0.1.app.zip
 
